@@ -11,9 +11,9 @@ pipeline {
         // Update these values with your specific details
         DOCKER_IMAGE = 'ameya133/fastapi-auth-service'
         DOCKER_TAG = "${env.BUILD_NUMBER}"
-        DOCKER_CREDENTIALS_ID = 'dockerhub-creds' // Update this with your Jenkins credentials ID
+        DOCKER_CREDENTIALS_ID = 'docker-hub-creds' // Update this with your Jenkins credentials ID
         GITHUB_REPO = 'ameya-hc/Fastapi-authservice'
-        BRANCH_NAME = 'devlopment'
+        BRANCH_NAME = 'devlopement'
         GITHUB_CREDENTIALS_ID = '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'  // Add your GitHub credentials ID here
     }
 
@@ -50,6 +50,7 @@ pipeline {
                             echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                             docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
                             docker push ${DOCKER_IMAGE}:latest
+                            docker logout
                         '''
                     }
                 }
